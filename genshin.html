@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUI Top Up Store</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 90%;
+        margin: auto;
+    }
+
+    /* FORM */
+    .form-box {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        background: #0f172a;
+        color: white;
+        border: 1px solid #334155;
+    }
+
+    input:focus {
+        border: 1px solid #38bdf8;
+    }
+
+    .full {
+        width: 100%;
+    }
+
+    /* DIAMOND CARDS */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        border: 2px solid #38bdf8;
+    }
+
+    .card img {
+        width: 60px;
+        margin: 10px 0;
+    }
+
+    .price {
+        margin-top: 10px;
+        background: #38bdf8;
+        padding: 8px;
+        border-radius: 20px;
+        color: black;
+        font-weight: bold;
+    }
+
+    /* BUTTON */
+    .btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #22c55e;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background: #16a34a;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>MUI TOP UP STORE</h1>
+
+<div class="container">
+
+    <!-- FORM -->
+    <div class="form-box"> 
+    <h3>Account Info</h3>
+
+    <div class="form-group">
+        <input type="text" id="userId" placeholder="User ID" required>
+        <input type="text" id="zoneId" placeholder="Zone ID" required>
+    </div>
+
+    <input class="full" type="email" id="email" placeholder="Email" required>
+</div>
+
+    <!-- DIAMOND -->
+    <h3>Choose Item</h3>
+
+    <div class="cards">
+
+        <div class="card" onclick="addToCart('Genshin- Weekly Diamond Pass - RM19.00')">
+            <h4>Weekly Diamond Pass</h4>
+            <img src="welkin.jpg">
+            <div class="price">RM19.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('Genshin- 60 Genesis Crystal - RM4.00')">
+            <h4>60 Genesis Crystal</h4>
+            <img src="genesiskecil.jpg">
+            <div class="price">RM4.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('Genshin- 300+30 Genesis Crystal - RM20.00')">
+            <h4>300+30 Genesis Crystal</h4>
+            <img src="genesissederhana.jpg">
+            <div class="price">RM20.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('Genshin- 60 Chronal Nexus - RM4.00')">
+            <h4>60 Chronal Nexus</h4>
+            <img src="chronalkecil.jpg">
+            <div class="price">RM4.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('Genshin- 300+30 Chronal Nexus - RM20.00')">
+            <h4>300+30 Chronal Nexus</h4>
+            <img src="chronalsederhana.jpg">
+            <div class="price">RM20.00</div>
+        </div>
+
+
+    </div>
+    <p id="cart">Cart: Tiada item</p>
+    <button class="btn" onclick="checkout()">Checkout</button>
+
+</div>
+    <script>
+let selectedItem = "";
+
+// bila klik card
+function addToCart(item) {
+    selectedItem = item;
+    document.getElementById("cart").innerText = "Cart: " + item;
+}
+
+// bila tekan checkout
+function checkout() {
+    let userId = document.getElementById("userId").value;
+    let zoneId = document.getElementById("zoneId").value;
+    let email = document.getElementById("email").value;
+
+    if (!userId || !zoneId || !email || !selectedItem) {
+        alert("Sila lengkapkan semua maklumat & pilih item!");
+        return;
+    }
+
+    let message = `🔥 ORDER TOP UP 🔥%0A
+User ID: ${userId}%0A
+Zone ID: ${zoneId}%0A
+Email: ${email}%0A
+Item: ${selectedItem}`;
+
+    let phone = "601162637272"; 
+
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUI Top Up Store</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 90%;
+        margin: auto;
+    }
+
+    /* FORM */
+    .form-box {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        background: #0f172a;
+        color: white;
+        border: 1px solid #334155;
+    }
+
+    input:focus {
+        border: 1px solid #38bdf8;
+    }
+
+    .full {
+        width: 100%;
+    }
+
+    /* DIAMOND CARDS */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        border: 2px solid #38bdf8;
+    }
+
+    .card img {
+        width: 60px;
+        margin: 10px 0;
+    }
+
+    .price {
+        margin-top: 10px;
+        background: #38bdf8;
+        padding: 8px;
+        border-radius: 20px;
+        color: black;
+        font-weight: bold;
+    }
+
+    /* BUTTON */
+    .btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #22c55e;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background: #16a34a;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>MUI TOP UP STORE</h1>
+
+<div class="container">
+
+    <!-- FORM -->
+    <div class="form-box">
+        <h3>Account Info</h3>
+
+        <div class="form-group">
+        <input type="text" id="userId" placeholder="User ID" required>
+        <input type="text" id="zoneId" placeholder="Zone ID" required>
+    </div>
+
+    <input class="full" type="email" id="email" placeholder="Email" required>
+</div>
+
+    <!-- DIAMOND -->
+    <h3>Choose Item</h3>
+
+    <div class="cards">
+
+        <div class="card" onclick="addToCart('mlbb- Weekly Diamond Pass - RM9.00')">
+            <h4>Weekly Diamond Pass</h4>
+            <img src="WDP.jpg">
+            <div class="price">RM9.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 28 Diamonds - RM3.50')">
+            <h4>28 Diamonds</h4>
+            <img src="diamondkecil.jpg">
+            <div class="price">RM3.50</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 70 Diamonds - RM7.00')">
+            <h4>70 Diamonds</h4>
+            <img src="diamondkecil.jpg">
+            <div class="price">RM7.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 140 Diamonds - RM12.00')">
+            <h4>140 Diamonds</h4>
+            <img src="diamondsederhana.jpg">
+            <div class="price">RM12.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 284 Diamonds - RM23.00')">
+            <h4>284 Diamonds</h4>
+            <img src="diamondsederhana.jpg">
+            <div class="price">RM23.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 355 Diamonds - RM29.00')">
+            <h4>355 Diamonds</h4>
+            <img src="diamondsederhana.jpg">
+            <div class="price">RM29.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 429 Diamonds - RM35.00')">
+            <h4>429 Diamonds</h4>
+            <img src="diamondsederhana.jpg">
+            <div class="price">RM35.00</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 513 Diamonds - RM43.90')">
+            <h4>513 Diamonds</h4>
+            <img src="diamondbesar.jpg">
+            <div class="price">RM43.90</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 639 Diamonds - RM51.90')">
+            <h4>639 Diamonds</h4>
+            <img src="diamondbesar.jpg">
+            <div class="price">RM51.90</div>
+        </div>
+
+        <div class="card" onclick="addToCart('mlbb- 716 Diamonds - RM58.00')">
+            <h4>716 Diamonds</h4>
+            <img src="diamondbesar.jpg">
+            <div class="price">RM58.00</div>
+        </div>
+
+    </div>
+    <p id="cart">Cart: Tiada item</p>
+    <button class="btn" onclick="checkout()">Checkout</button>
+
+</div>
+    <script>
+let selectedItem = "";
+
+// bila klik card
+function addToCart(item) {
+    selectedItem = item;
+    document.getElementById("cart").innerText = "Cart: " + item;
+}
+
+// bila tekan checkout
+function checkout() {
+    let userId = document.getElementById("userId").value;
+    let zoneId = document.getElementById("zoneId").value;
+    let email = document.getElementById("email").value;
+
+    if (!userId || !zoneId || !email || !selectedItem) {
+        alert("Sila lengkapkan semua maklumat & pilih item!");
+        return;
+    }
+
+    let message = `🔥 ORDER TOP UP 🔥%0A
+User ID: ${userId}%0A
+Zone ID: ${zoneId}%0A
+Email: ${email}%0A
+Item: ${selectedItem}`;
+
+    let phone = "601162637272"; 
+
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+}
+</script>
+</body>
+</html>
